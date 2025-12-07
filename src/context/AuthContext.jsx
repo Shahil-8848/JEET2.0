@@ -36,6 +36,30 @@ export const AuthProvider = ({ children }) => {
         return () => subscription.unsubscribe();
     }, []);
 
+    // Real-time subscription for profile updates
+    useEffect(() => {
+        if (!user) return;
+
+        const channel = supabase
+            .channel(`public:users:${user.id}`)
+            .on('postgres_changes',
+                {
+                    event: 'UPDATE',
+                    schema: 'public',
+                    table: 'users',
+                    filter: `id=eq.${user.id}`
+                },
+                (payload) => {
+                    setProfile(payload.new);
+                }
+            )
+            .subscribe();
+
+        return () => {
+            supabase.removeChannel(channel);
+        };
+    }, [user]);
+
     const fetchProfile = async (userId) => {
         try {
             const { data, error } = await supabase

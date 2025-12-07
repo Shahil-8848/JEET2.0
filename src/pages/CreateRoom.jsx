@@ -28,69 +28,32 @@ const CreateRoom = () => {
     const handleCreate = async () => {
         if (!user || !profile) return;
 
-        if (profile.balance < entryFee) {
-            toast.error('Insufficient balance! Please top up.');
-            return;
-        }
-
         setLoading(true);
         try {
             // 1. Generate Room Code
             const roomCode = Math.floor(1000 + Math.random() * 9000).toString();
 
-            // 2. Create Match
-            const { data: match, error: matchError } = await supabase
-                .from('matches')
-                .insert({
-                    game_type: gameType,
-                    host_id: user.id,
-                    entry_fee: entryFee,
-                    prize_amount: prizePool,
-                    team_size: teamSize,
-                    room_code: roomCode,
-                    status: 'PENDING',
-                    host_ready: false,
-                    opponent_ready: false
-                })
-                .select()
-                .single();
+            // 2. Call RPC to Create Match & Deduct Balance
+            const { data, error } = await supabase.rpc('create_match', {
+                p_game_type: gameType,
+                p_entry_fee: entryFee,
+                p_team_size: teamSize,
+                p_room_code: roomCode,
+                p_prize_amount: prizePool
+            });
 
-            if (matchError) throw matchError;
-
-            // 3. Deduct Balance (Transaction)
-            const { error: txError } = await supabase
-                .from('transactions')
-                .insert({
-                    user_id: user.id,
-                    type: 'ENTRY_FEE',
-                    amount: -entryFee,
-                    match_id: match.id,
-                    description: `Entry fee for ${gameType} match`
-                });
-
-            if (txError) throw txError;
-
-            // 4. Update User Balance
-            const { error: balanceError } = await supabase
-                .from('users')
-                .update({ balance: profile.balance - entryFee })
-                .eq('id', user.id);
-
-            if (balanceError) throw balanceError;
+            if (error) throw error;
+            if (!data.success) throw new Error(data.error);
 
             // Refresh profile to show new balance
             refreshProfile();
 
             toast.success('Room created successfully!');
-            navigate('/'); // Or navigate to match room directly?
-            // "Room appears in 'New Matches' section... Host shares room code"
-            // Usually host goes to match room to wait.
-            // Let's navigate to match room.
-            navigate(`/match/${match.id}`);
+            navigate(`/match/${data.match_id}`);
 
         } catch (error) {
             console.error('Error creating room:', error);
-            toast.error('Failed to create room. Please try again.');
+            toast.error(error.message || 'Failed to create room. Please try again.');
         } finally {
             setLoading(false);
         }

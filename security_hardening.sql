@@ -1,3 +1,64 @@
+-- 0. RPC to Create Match Securely
+create or replace function public.create_match(
+  p_game_type text,
+  p_entry_fee numeric,
+  p_team_size text,
+  p_room_code text,
+  p_prize_amount numeric
+)
+returns json
+language plpgsql
+security definer
+as $$
+declare
+  v_match_id uuid;
+  v_user_balance numeric;
+begin
+  -- Get user balance
+  select balance into v_user_balance from public.users where id = auth.uid();
+
+  if v_user_balance < p_entry_fee then
+    return json_build_object('success', false, 'error', 'Insufficient balance');
+  end if;
+
+  -- Deduct balance
+  update public.users
+  set balance = balance - p_entry_fee
+  where id = auth.uid();
+
+  -- Create Match
+  insert into public.matches (
+    game_type,
+    host_id,
+    entry_fee,
+    prize_amount,
+    team_size,
+    room_code,
+    status,
+    host_ready,
+    opponent_ready
+  ) values (
+    p_game_type,
+    auth.uid(),
+    p_entry_fee,
+    p_prize_amount,
+    p_team_size,
+    p_room_code,
+    'PENDING',
+    false,
+    false
+  ) returning id into v_match_id;
+
+  -- Create transaction
+  insert into public.transactions (user_id, type, amount, description, match_id)
+  values (auth.uid(), 'ENTRY_FEE', -p_entry_fee, 'Entry fee for ' || p_game_type || ' match', v_match_id);
+
+  return json_build_object('success', true, 'match_id', v_match_id);
+exception when others then
+  return json_build_object('success', false, 'error', SQLERRM);
+end;
+$$;
+
 -- 1. RPC to Join a Match Securely
 create or replace function public.join_match(match_id uuid)
 returns json
@@ -162,40 +223,17 @@ $$;
 
 -- 4. Harden RLS Policies
 
--- Revoke direct UPDATE on users balance/stats from public (authenticated users)
--- We need to keep UPDATE for other fields if necessary, but ideally we restrict it.
--- Since we can't easily do column-level RLS for UPDATE in standard policies without complex checks,
--- we will rely on the fact that the client should NOT be updating these columns.
--- BUT to be secure, we should restrict it.
--- For now, we'll create a policy that only allows updating 'full_name' or other non-sensitive fields?
--- Or we can use a trigger to prevent balance updates from the client.
--- A simpler approach for this task:
--- Create a trigger that raises an error if balance/stats are modified by a non-service_role user (if possible)
--- OR just trust the RPCs and assume the client won't try to hack it if we remove the code.
--- BUT the user asked for "no such tampering place".
--- So, let's create a trigger to protect balance.
-
-create or replace function public.protect_sensitive_columns()
-returns trigger as $$
-begin
-  if (new.balance != old.balance) or 
-     (new.total_matches != old.total_matches) or 
-     (new.wins != old.wins) or 
-     (new.losses != old.losses) or 
-     (new.total_earnings != old.total_earnings) then
-    if auth.role() = 'authenticated' then
-       raise exception 'You are not allowed to update balance or stats directly.';
-    end if;
-  end if;
-  return new;
-end;
-$$ language plpgsql;
-
+-- Remove the restrictive trigger if it exists
 drop trigger if exists protect_user_balance on public.users;
-create trigger protect_user_balance
-  before update on public.users
-  for each row
-  execute procedure public.protect_sensitive_columns();
+drop function if exists public.protect_sensitive_columns();
+
+-- Instead, use Column-Level Privileges
+-- Revoke UPDATE on all columns for authenticated users
+revoke update on public.users from authenticated;
+
+-- Grant UPDATE ONLY on specific non-sensitive columns (e.g., full_name, avatar_url if exists)
+-- This prevents users from updating balance, wins, losses, etc.
+grant update (full_name) on public.users to authenticated;
 
 -- Revoke INSERT on transactions for authenticated users (force use of RPCs)
 drop policy if exists "Users can insert own transactions." on public.transactions;

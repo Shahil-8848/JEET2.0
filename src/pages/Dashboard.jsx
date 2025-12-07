@@ -12,7 +12,7 @@ const GAMES = [
     { id: 'freefire', name: 'Free Fire', icon: 'https://www.fantastick.in/cdn/shop/products/PRGA032.jpg?v=1704274073', activeMatches: 8 },
     { id: 'cod', name: 'Call of Duty', icon: 'https://www.citypng.com/public/uploads/preview/hd-call-of-duty-mobile-codm-game-official-logo-png-7017516947877289uky0ombog.png', activeMatches: 10 },
     { id: 'pes', name: 'E-Football', icon: 'https://www.citypng.com/public/uploads/preview/hd-call-of-duty-mobile-codm-game-official-logo-png-7017516947877289uky0ombog.png', activeMatches: 10 },
-    { id: 'valorant', name: 'Valorant', icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8D40sFCMjdpEJhjtFbI58RD11RADxkwcPXQ&s', activeMatches: 5 },
+    { id: '', name: 'Valorant', icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8D40sFCMjdpEJhjtFbI58RD11RADxkwcPXQ&s', activeMatches: 5 },
     { id: 'Ludo', name: 'Ludo', icon: 'https://as2.ftcdn.net/jpg/02/04/63/61/1000_F_204636161_W40AlnXasAyPTt2qCocOAdbqZpP5DvXZ.jpg', activeMatches: 15 },
 ];
 
