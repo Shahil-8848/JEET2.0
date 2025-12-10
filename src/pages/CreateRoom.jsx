@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
@@ -18,12 +18,19 @@ const CreateRoom = () => {
     const [entryFee, setEntryFee] = useState(ENTRY_FEES[1]); // Default 100
     const [teamSize, setTeamSize] = useState(TEAM_SIZES[0]);
     const [loading, setLoading] = useState(false);
+    const [prizePool, setPrizePool] = useState(0);
 
-    // Calculate prize (e.g., 90% of total entry fees)
-    // Total Entry = Entry Fee * 2 (for 1v1)
-    // Prize = Total Entry * 0.9
-    // Platform Fee = 10%
-    const prizePool = (entryFee * 2) * 0.9;
+    // Calculate prize dynamically
+    useEffect(() => {
+        let maxPlayers = 2;
+        if (teamSize === '1v1') maxPlayers = 2;
+        if (teamSize === '2v2') maxPlayers = 4;
+        if (teamSize === 'Squad') maxPlayers = 4; // Assuming 4-player lobby for now
+
+        const totalCollection = entryFee * maxPlayers;
+        const prize = totalCollection * 0.9; // 10% Platform Fee
+        setPrizePool(Math.floor(prize));
+    }, [entryFee, teamSize]);
 
     const handleCreate = async () => {
         if (!user || !profile) return;
@@ -139,9 +146,15 @@ const CreateRoom = () => {
                         <span className="text-gray-400">Entry Fee</span>
                         <span className="font-bold">Rs.{entryFee}</span>
                     </div>
+                    {/* 
+                      Optional: Show calculation details
+                      4 Players * 100 = 400
+                      400 * 0.1 = 40 Fee
+                      360 Prize
+                    */}
                     <div className="flex justify-between items-center mb-2">
-                        <span className="text-gray-400">Platform Fee (10%)</span>
-                        <span className="text-error">-Rs.{(entryFee * 2) * 0.1}</span>
+                        <span className="text-gray-400">Team Size</span>
+                        <span className="font-bold">{teamSize}</span>
                     </div>
                     <div className="border-t border-gray-700 my-2 pt-2 flex justify-between items-center">
                         <span className="text-primary font-bold">Winning Prize</span>
