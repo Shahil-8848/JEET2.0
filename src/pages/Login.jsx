@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { Eye, EyeOff, Mail, Lock, Gamepad2, Sparkles, Zap, Trophy, Flame, Star } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
+    const { signIn } = useAuth();
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -128,7 +131,7 @@ const Login = () => {
                     </div>
 
                     {/* Login Form */}
-                    <div className="space-y-6 relative">
+                    <form onSubmit={handleSubmit} className="space-y-6 relative">
                         {/* Email Field */}
                         <div className="relative group">
                             <label className="block text-sm font-bold text-gray-300 mb-2 tracking-wide">
@@ -196,7 +199,7 @@ const Login = () => {
 
                         {/* Submit Button */}
                         <button
-                            onClick={handleSubmit}
+                            type="submit"
                             disabled={loading}
                             className="relative w-full group overflow-hidden mt-8"
                         >
@@ -222,7 +225,7 @@ const Login = () => {
                             {/* Shimmer Effect */}
                             <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent rounded-xl" />
                         </button>
-                    </div>
+                    </form>
 
                     {/* Footer Links */}
                     <div className="mt-8 text-center relative">
