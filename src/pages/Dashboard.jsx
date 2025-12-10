@@ -9,11 +9,11 @@ import { Loader2 } from 'lucide-react';
 
 const GAMES = [
     { id: 'pubg', name: 'PUBG Mobile', icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSh-7jSA0o27ZSlj0_0_MS_7QMvQ3BZEHTgqOFKiT_74j5AX3VfkbumACiuT379nJr8b7M&usqp=CAU', activeMatches: 12 },
-    { id: 'freefire', name: 'Free Fire', icon: 'https://www.fantastick.in/cdn/shop/products/PRGA032.jpg?v=1704274073', activeMatches: 8 },
-    { id: 'cod', name: 'Call of Duty', icon: 'https://www.citypng.com/public/uploads/preview/hd-call-of-duty-mobile-codm-game-official-logo-png-7017516947877289uky0ombog.png', activeMatches: 10 },
-    { id: 'pes', name: 'E-Football', icon: 'https://www.citypng.com/public/uploads/preview/hd-call-of-duty-mobile-codm-game-official-logo-png-7017516947877289uky0ombog.png', activeMatches: 10 },
-    { id: '', name: 'Valorant', icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8D40sFCMjdpEJhjtFbI58RD11RADxkwcPXQ&s', activeMatches: 5 },
-    { id: 'Ludo', name: 'Ludo', icon: 'https://as2.ftcdn.net/jpg/02/04/63/61/1000_F_204636161_W40AlnXasAyPTt2qCocOAdbqZpP5DvXZ.jpg', activeMatches: 15 },
+    { id: 'freefire', name: 'Free Fire', icon: 'https://play-lh.googleusercontent.com/1wE91ae_1YIJtIjQ1YJz5RhAajxEpF1TfrXGg7tcrKl90MOnF7XdFj71pw_MSQbyhM5PYz-eRdeBFQBzSGrV=w240-h480-rw', activeMatches: 8 },
+    { id: 'chess', name: 'Chess', icon: 'https://img.lovepik.com/bg/20240415/iconic-chess-queen-a-stunning-golden-symbol-on-a-matte_5831117_wh860.jpg!/fw/860', activeMatches: 10 },
+    { id: 'pes', name: 'E-Football', icon: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7tng_68f95cmx5h0cMlR3jyjAJWBza17LtQ&s', activeMatches: 10 },
+    { id: 'ml', name: 'Mobile Legends', icon: 'https://cdn.dribbble.com/userupload/45005925/file/000a0d6f10b27b5f25b53dcff0e2a0d0.png?resize=400x0', activeMatches: 5 },
+    { id: 'ludo', name: 'Ludo', icon: 'https://as2.ftcdn.net/jpg/02/04/63/61/1000_F_204636161_W40AlnXasAyPTt2qCocOAdbqZpP5DvXZ.jpg', activeMatches: 15 },
 ];
 
 const Dashboard = () => {

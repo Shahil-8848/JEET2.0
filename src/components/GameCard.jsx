@@ -62,7 +62,7 @@ const GameCard = ({ game, onSelect }) => {
       onClick={() => onSelect(game)}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="group relative w-full aspect-[3/3.7] overflow-hidden rounded-2xl transition-all duration-500 hover:scale-[1.03] hover:z-10"
+      className="group relative w-full aspect-[4/5] md:aspect-[3/3.7] overflow-hidden rounded-2xl transition-all duration-500 hover:scale-[1.03] hover:z-10"
     >
       {/* Outer Glow Effect */}
       <div
@@ -127,7 +127,7 @@ const GameCard = ({ game, onSelect }) => {
         {/* Content */}
         <div className="relative h-full flex flex-col items-center justify-between p-6">
           {/* Top Stats Badge */}
-          <div className="self-stretch flex justify-end">
+          <div className="hidden md:flex self-stretch justify-end">
             <div
               className={`relative px-2 py-1 mb-2 rounded-full bg-gradient-to-r ${theme.gradient} ${theme.badgeGlow} transition-all duration-300 group-hover:scale-110`}
             >
@@ -164,7 +164,7 @@ const GameCard = ({ game, onSelect }) => {
 
               {/* Icon Background with Glassmorphism */}
               <div
-                className={`relative w-26 h-26 rounded-full bg-gradient-to-br ${theme.iconBg} backdrop-blur-xl border ${theme.border} flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-2xl`}
+                className={`relative w-26 h-26  rounded-full bg-gradient-to-br ${theme.iconBg} backdrop-blur-xl border ${theme.border} flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-2xl`}
               >
                 {/* Inner Glow */}
                 <div
@@ -190,12 +190,12 @@ const GameCard = ({ game, onSelect }) => {
 
           {/* Game Info */}
           <div className="text-center space-y-3 w-full">
-            <h3 className="font-bold text-lg text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:via-gray-100 group-hover:to-gray-300 transition-all duration-300 drop-shadow-lg">
+            <h3 className="font-bold text-lg md:text-xl text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:via-gray-100 group-hover:to-gray-300 transition-all duration-300 drop-shadow-lg">
               {game.name}
             </h3>
 
             {/* Stats Bar */}
-            <div className="flex items-center justify-center gap-4 px-4 py-2.5 bg-gray-900/60 backdrop-blur-md rounded-xl border border-gray-800 group-hover:border-gray-700 transition-all duration-300">
+            <div className="hidden md:flex items-center justify-center gap-4 px-4 py-2.5 bg-gray-900/60 backdrop-blur-md rounded-xl border border-gray-800 group-hover:border-gray-700 transition-all duration-300">
               <div className="flex items-center gap-1.5 text-gray-400 group-hover:text-gray-200 transition-colors">
                 <Users className="w-4 h-4" />
                 <span className="text-xs font-semibold">Players</span>

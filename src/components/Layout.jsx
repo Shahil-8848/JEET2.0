@@ -58,68 +58,83 @@ const Layout = () => {
             </main>
 
             {/* Bottom Navigation Bar - Figma Style */}
-            <nav className="fixed ml-5 p-5 bottom-6 left-1/2 -translate-x-1/2 z-50">
-                <div className="bg-surface/95 backdrop-blur-lg border border-gray-800 rounded-full shadow-2xl shadow-black/40 px-3 py-3">
-                    <div className="flex p-2 items-center gap-2">
-                        {/* Left Section */}
+            <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-2xl px-2">
+                <div className="bg-gray-900/95 backdrop-blur-lg border border-gray-800 rounded-full shadow-2xl shadow-black/40">
+                    <div className="flex items-center justify-between px-2 sm:px-3 py-2.5 sm:py-3 gap-1 sm:gap-2">
+                        {/* Home Button */}
                         <Link
                             to="/"
-                            className={`flex items-center gap-2 px-4 py-2.5 rounded-full transition-all ${isActive('/')
-                                ? 'bg-primary/20 text-primary'
+                            className={`flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-full transition-all flex-shrink-0 ${isActive('/')
+                                ? 'bg-cyan-500/20 text-cyan-400'
                                 : 'hover:bg-gray-800 text-gray-400'
                                 }`}
-                            title="Dashboard"
+                            title="Home"
                         >
-                            <Home size={20} />
-                            <span className="hidden sm:inline text-sm font-medium">Home</span>
+                            <Home size={18} className="sm:w-5 sm:h-5" />
+                            <span className="hidden xs:inline text-xs sm:text-sm font-medium whitespace-nowrap">
+                                Home
+                            </span>
                         </Link>
 
+                        {/* Profile Button */}
                         <Link
                             to="/profile"
-                            className={`flex items-center gap-2 px-4 py-2.5 rounded-full transition-all ${isActive('/profile')
-                                ? 'bg-primary/20 text-primary'
+                            className={`flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-full transition-all flex-shrink-0 ${isActive('/profile')
+                                ? 'bg-cyan-500/20 text-cyan-400'
                                 : 'hover:bg-gray-800 text-gray-400'
                                 }`}
                             title="Profile"
                         >
-                            <User size={20} />
-                            <span className="hidden sm:inline text-sm font-medium">Profile</span>
+                            <User size={18} className="sm:w-5 sm:h-5" />
+                            <span className="hidden xs:inline text-xs sm:text-sm font-medium whitespace-nowrap">
+                                Profile
+                            </span>
                         </Link>
 
-                        {/* Separator */}
-                        <div className="w-px h-8 bg-gray-700 mx-1"></div>
+                        {/* Separator - Hidden on Mobile */}
+                        <div className="hidden md:block w-px h-6 sm:h-8 bg-gray-700 mx-0.5 sm:mx-1"></div>
 
-                        {/* Center - Create Room (Primary Action) */}
+                        {/* Create Room Button (Primary Action) */}
                         <Link
                             to="/create-room"
-                            className={`flex items-center gap-2 bg-primary hover:bg-primary/90 text-black px-5 py-2.5 rounded-full transition-all font-semibold shadow-lg shadow-primary/30 ${isActive('/create-room')
-                                ? 'bg-primary/20 text-white'
-                                : 'hover:bg-gray-800 text-white-400'
-                                }`}
+                            className="flex items-center justify-center gap-1.5 sm:gap-2 bg-cyan-500 hover:bg-cyan-400 text-black px-3 sm:px-5 py-2 sm:py-2.5 rounded-full transition-all font-semibold shadow-lg shadow-cyan-500/30 flex-shrink-0 hover:scale-105 active:scale-95"
                         >
-                            <PlusCircle size={22} strokeWidth={2.5} />
-                            <span className="text-sm">Create Room</span>
+                            <PlusCircle size={18} className="sm:w-5 sm:h-5" strokeWidth={2.5} />
+                            <span className="text-xs sm:text-sm whitespace-nowrap">Create</span>
                         </Link>
 
-                        {/* Separator */}
-                        <div className="w-px h-8 bg-gray-700 mx-1"></div>
+                        {/* Separator - Hidden on Mobile */}
+                        <div className="hidden md:block w-px h-6 sm:h-8 bg-gray-700 mx-0.5 sm:mx-1"></div>
 
-                        {/* Right Section */}
-                        <button
-                            className="flex items-center gap-2 px-4 py-2.5 rounded-full hover:bg-gray-800 text-gray-400 transition-all"
-                            title="Top Up Wallet"
+                        {/* Wallet Button */}
+                        <Link
+                            to="/wallet"
+                            className={`flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-full transition-all flex-shrink-0 ${isActive('/wallet')
+                                ? 'bg-cyan-500/20 text-cyan-400'
+                                : 'hover:bg-gray-800 text-gray-400'
+                                }`}
+                            title="Wallet"
                         >
-                            <Wallet size={20} />
-                            <span className="hidden sm:inline text-sm font-medium">Wallet</span>
-                        </button>
+                            <Wallet size={18} className="sm:w-5 sm:h-5" />
+                            <span className="hidden xs:inline text-xs sm:text-sm font-medium whitespace-nowrap">
+                                Wallet
+                            </span>
+                        </Link>
 
-                        <button
-                            className="flex items-center gap-2 px-4 py-2.5 rounded-full hover:bg-gray-800 text-gray-400 transition-all"
-                            title="Transfer Funds"
+                        {/* Transfer Button */}
+                        <Link
+                            to="/transfer"
+                            className={`flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-full transition-all flex-shrink-0 ${isActive('/transfer')
+                                ? 'bg-cyan-500/20 text-cyan-400'
+                                : 'hover:bg-gray-800 text-gray-400'
+                                }`}
+                            title="Transfer"
                         >
-                            <ArrowRightLeft size={20} />
-                            <span className="hidden sm:inline text-sm font-medium">Transfer</span>
-                        </button>
+                            <ArrowRightLeft size={18} className="sm:w-5 sm:h-5" />
+                            <span className="hidden xs:inline text-xs sm:text-sm font-medium whitespace-nowrap">
+                                Transfer
+                            </span>
+                        </Link>
                     </div>
                 </div>
             </nav>
