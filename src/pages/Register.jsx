@@ -41,7 +41,7 @@ const Register = () => {
                             value={fullName}
                             onChange={(e) => setFullName(e.target.value)}
                             className="w-full bg-background border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-                            placeholder="John Doe"
+                            placeholder=""
                             required
                         />
                     </div>
@@ -53,7 +53,7 @@ const Register = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="w-full bg-background border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-                            placeholder="you@example.com"
+                            placeholder=""
                             required
                         />
                     </div>
@@ -65,7 +65,7 @@ const Register = () => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             className="w-full bg-background border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
-                            placeholder="••••••••"
+                            placeholder=""
                             required
                             minLength={6}
                         />

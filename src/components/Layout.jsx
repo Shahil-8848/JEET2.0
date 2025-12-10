@@ -122,8 +122,8 @@ const Layout = () => {
                         </Link>
 
                         {/* Transfer Button */}
-                        <Link
-                            to="/transfer"
+                        <button
+                            onClick={signOut}
                             className={`flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-full transition-all flex-shrink-0 ${isActive('/transfer')
                                 ? 'bg-cyan-500/20 text-cyan-400'
                                 : 'hover:bg-gray-800 text-gray-400'
@@ -134,7 +134,7 @@ const Layout = () => {
                             <span className="hidden xs:inline text-xs sm:text-sm font-medium whitespace-nowrap">
                                 Transfer
                             </span>
-                        </Link>
+                        </button>
                     </div>
                 </div>
             </nav>
