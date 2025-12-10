@@ -9,16 +9,17 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [focusedField, setFocusedField] = useState(null);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-
-        // Simulate login - Replace with actual signIn logic
-        setTimeout(() => {
-            console.log('Login with:', { email, password });
+        try {
+            await signIn(email, password);
+            navigate('/');
+        } catch (error) {
+            // Error handled in context
+        } finally {
             setLoading(false);
-            // In real app: await signIn(email, password); navigate('/');
-        }, 2000);
+        }
     };
 
     return (
