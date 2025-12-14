@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
-import { Trash2, ExternalLink, Loader2 } from 'lucide-react';
+import { Trash2, ExternalLink, Loader2, Sparkle } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const AdminRooms = () => {
@@ -164,7 +164,10 @@ const AdminRooms = () => {
                                                 {room.status}
                                             </span>
                                         </td>
-                                        <td className="p-4 text-primary">Rs. {room.prize_amount}</td>
+                                        <td className="p-4 text-primary flex items-center gap-1">
+                                            <Sparkle size={14} className="fill-current" />
+                                            {room.prize_amount}
+                                        </td>
                                         <td className="p-4 text-xs text-gray-500">{new Date(room.created_at).toLocaleDateString()}</td>
                                         <td className="p-4">
                                             <button

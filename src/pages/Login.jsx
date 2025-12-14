@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Eye, EyeOff, Mail, Lock, Gamepad2, Sparkles, Zap, Trophy, Flame, Star } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import jeet from "../assets/code.png";
 
 const Login = () => {
     const { signIn } = useAuth();
@@ -100,7 +101,7 @@ const Login = () => {
                             <div className="absolute inset-[-15px] rounded-full border border-transparent border-b-pink-500 border-l-orange-500 animate-spin-slow" style={{ animationDuration: '6s', animationDirection: 'reverse' }} />
 
                             {/* Logo Background */}
-                            <div className="relative w-24 h-24">
+                            <div className="relative w-28 h-28">
                                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 via-purple-500 to-pink-500 rounded-2xl animate-pulse-slow" />
                                 <div className="absolute inset-[2px] bg-gradient-to-br from-gray-950 to-gray-900 rounded-2xl" />
                                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent rounded-2xl" />
@@ -108,7 +109,7 @@ const Login = () => {
                                 {/* Logo Icon */}
                                 <div className="absolute inset-0 flex items-center justify-center">
                                     {/* <Gamepad2 className="w-12 h-12 text-cyan-400 drop-shadow-[0_0_10px_rgba(6,182,212,0.8)]" strokeWidth={2.5} /> */}
-                                    <img className="w-13 h-13 rounded-full" src="https://png.pngtree.com/png-vector/20191203/ourmid/pngtree-gaming-logo-design-png-image_2064891.jpg" alt="" />
+                                    <img className="w-28 h-28 rounded-full" src={jeet} alt="" />
 
                                     <Sparkles className="absolute top-0 right-0 w-5 h-5 text-cyan-400 animate-orbit" style={{ animationDelay: '0s' }} />
                                 </div>

@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
 import toast from 'react-hot-toast';
-import { Loader2, Copy, CheckCircle, Upload, ShieldCheck, ArrowLeft, Users, Trophy, Radio } from 'lucide-react';
+import { Loader2, Copy, CheckCircle, Upload, ShieldCheck, ArrowLeft, Users, Trophy, Radio, Sparkle } from 'lucide-react';
 import MatchRules from '../components/MatchRules';
 
 const MatchRoom = () => {
@@ -184,7 +184,10 @@ const MatchRoom = () => {
                         <div className="space-y-6">
                             <div className="bg-background/50 p-4 rounded-xl border border-gray-700/50 flex justify-between items-center">
                                 <span className="text-gray-400 text-sm">Entry Fee</span>
-                                <span className="text-2xl font-bold text-warning font-mono">Rs.{match.entry_fee}</span>
+                                <div className="flex items-center gap-1 text-2xl font-bold text-warning font-mono">
+                                    <Sparkle className="w-6 h-6 fill-current" />
+                                    {match.entry_fee}
+                                </div>
                             </div>
 
                             <div>
@@ -251,7 +254,8 @@ const MatchRoom = () => {
                         <span className="text-[10px] text-gray-500 uppercase font-bold tracking-wider">Prize Pool</span>
                         <span className="text-2xl font-bold text-primary flex items-center gap-1">
                             <Trophy size={18} className="text-warning" />
-                            Rs.{match.prize_amount}
+                            <Sparkle className="w-4 h-4 fill-current mr-1" />
+                            {match.prize_amount}
                         </span>
                     </div>
                 </div>

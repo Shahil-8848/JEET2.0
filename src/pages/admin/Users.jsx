@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
-import { Search, Wallet, Coins, Loader2, ArrowRightLeft } from 'lucide-react';
+import { Search, Wallet, Coins, Loader2, ArrowRightLeft, Sparkle } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const AdminUsers = () => {
@@ -108,7 +108,10 @@ const AdminUsers = () => {
                                                 <div className="text-xs text-gray-500">{user.email}</div>
                                             </div>
                                         </td>
-                                        <td className="p-4 font-mono text-primary">Rs. {user.balance}</td>
+                                        <td className="p-4 font-mono text-primary flex items-center gap-1">
+                                            <Sparkle size={14} className="fill-current" />
+                                            {user.balance}
+                                        </td>
                                         <td className="p-4">{user.total_matches}</td>
                                         <td className="p-4 text-xs">
                                             <span className="text-green-400">{user.wins}W</span> / <span className="text-red-400">{user.losses}L</span>
@@ -148,7 +151,10 @@ const AdminUsers = () => {
                             <p className="text-sm text-gray-400">User</p>
                             <p className="text-lg font-bold text-white">{selectedUser?.full_name}</p>
                             <p className="text-sm text-gray-400 mt-2">Current Balance</p>
-                            <p className="text-2xl font-mono text-primary">Rs. {selectedUser?.balance}</p>
+                            <p className="text-2xl font-mono text-primary flex items-center gap-1">
+                                <Sparkle size={20} className="fill-current" />
+                                {selectedUser?.balance}
+                            </p>
                         </div>
 
                         <form onSubmit={handleBalanceUpdate} className="space-y-4">
@@ -170,7 +176,9 @@ const AdminUsers = () => {
                             </div>
 
                             <div>
-                                <label className="block text-sm text-gray-400 mb-1">Amount (Rs)</label>
+                                <label className="block text-sm text-gray-400 mb-1 flex items-center gap-1">
+                                    Amount <Sparkle size={12} className="fill-current" />
+                                </label>
                                 <input
                                     type="number"
                                     required

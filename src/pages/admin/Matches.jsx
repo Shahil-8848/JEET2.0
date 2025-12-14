@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
-import { CheckCircle, ExternalLink, Loader2, Trophy, X, Eye } from 'lucide-react';
+import { CheckCircle, ExternalLink, Loader2, Trophy, X, Eye, Sparkle } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const AdminMatches = () => {
@@ -13,6 +13,26 @@ const AdminMatches = () => {
     }, []);
 
     // ... (imports remain)
+    const getSignedUrl = async (path) => {
+        if (!path) return null;
+
+        // Extract just the filename if path is a full URL
+        let filePath = path;
+        if (path.includes('/screenshots/')) {
+            filePath = path.split('/screenshots/')[1];
+        }
+
+        const { data, error } = await supabase.storage
+            .from('screenshots')
+            .createSignedUrl(filePath, 60 * 10); // 10 minutes
+
+        if (error) {
+            console.error('Error creating signed URL:', error);
+            return null;
+        }
+
+        return data.signedUrl;
+    };
 
     const fetchMatches = async () => {
         try {
@@ -33,7 +53,21 @@ const AdminMatches = () => {
                 .order('created_at', { ascending: false });
 
             if (error) throw error;
-            setMatches(data);
+            const matchesWithImages = await Promise.all(
+                data.map(async (match) => ({
+                    ...match,
+                    participants: await Promise.all(
+                        match.participants.map(async (p) => ({
+                            ...p,
+                            signedImage: p.screenshot_url
+                                ? await getSignedUrl(p.screenshot_url)
+                                : null
+                        }))
+                    )
+                }))
+            );
+
+            setMatches(matchesWithImages);
         } catch (error) {
             console.error('Error fetching matches:', error);
             toast.error('Failed to load matches');
@@ -67,7 +101,10 @@ const AdminMatches = () => {
                                     <p className="text-sm text-gray-400 font-mono">ID: {match.id}</p>
                                 </div>
                                 <div className="text-right">
-                                    <p className="text-primary font-bold text-lg">Rs.{match.prize_amount}</p>
+                                    <p className="text-primary font-bold text-lg flex items-center gap-1 justify-end">
+                                        <Sparkle size={16} className="fill-current" />
+                                        {match.prize_amount}
+                                    </p>
                                     <p className="text-xs text-gray-500">Prize Pool</p>
                                 </div>
                             </div>
@@ -77,9 +114,9 @@ const AdminMatches = () => {
                                 {match.participants?.map((p) => (
                                     <div key={p.id} className="relative aspect-video bg-black/40 rounded-xl overflow-hidden border border-gray-800">
                                         {p.screenshot_url ? (
-                                            <div className="group relative w-full h-full cursor-pointer" onClick={() => setSelectedImage(p.screenshot_url)}>
+                                            <div className="group relative w-full h-full cursor-pointer" onClick={() => setSelectedImage(p.signedImage)}>
                                                 <img
-                                                    src={p.screenshot_url}
+                                                    src={p.signedImage}
                                                     alt={`Proof by ${p.user?.full_name}`}
                                                     className="w-full h-full object-cover transition-transform group-hover:scale-110"
                                                     onError={(e) => {
@@ -90,7 +127,7 @@ const AdminMatches = () => {
                                                 <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity p-2 text-center">
                                                     <p className="text-xs text-white font-bold mb-2">{p.user?.full_name}</p>
                                                     <button
-                                                        onClick={(e) => { e.stopPropagation(); setSelectedImage(p.screenshot_url); }}
+                                                        onClick={(e) => { e.stopPropagation(); setSelectedImage(p.signedImage); }}
                                                         className="flex items-center gap-1 text-xs bg-primary/20 hover:bg-primary/30 text-primary border border-primary/50 px-3 py-1.5 rounded-full backdrop-blur-md transition-all scale-90 group-hover:scale-100"
                                                     >
                                                         <Eye size={14} /> View Proof

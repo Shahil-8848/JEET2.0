@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
 import toast from 'react-hot-toast';
-import { ArrowLeft, Gamepad2, Trophy, Users } from 'lucide-react';
+import { ArrowLeft, Gamepad2, Trophy, Users, Sparkle } from 'lucide-react';
 
 const GAMES = ['PUBG Mobile', 'Free Fire', 'Call of Duty', 'eFootball', 'Valorant', 'BGMI'];
 const ENTRY_FEES = [50, 100, 200, 500, 1000];
@@ -122,7 +122,7 @@ const CreateRoom = () => {
                 {/* Entry Fee */}
                 <div>
                     <label className="block text-sm font-medium text-gray-400 mb-3 flex items-center gap-2">
-                        <Trophy size={16} /> Entry Fee (Rs.)
+                        <Trophy size={16} /> Entry Fee
                     </label>
                     <div className="grid grid-cols-3 md:grid-cols-5 gap-3">
                         {ENTRY_FEES.map(fee => (
@@ -134,7 +134,10 @@ const CreateRoom = () => {
                                     : 'bg-background border-gray-700 hover:border-gray-500'
                                     }`}
                             >
-                                Rs.{fee}
+                                <div className="flex items-center gap-1">
+                                    <Sparkle size={14} className="fill-current" />
+                                    {fee}
+                                </div>
                             </button>
                         ))}
                     </div>
@@ -144,7 +147,10 @@ const CreateRoom = () => {
                 <div className="bg-background p-4 rounded-lg border border-gray-800">
                     <div className="flex justify-between items-center mb-2">
                         <span className="text-gray-400">Entry Fee</span>
-                        <span className="font-bold">Rs.{entryFee}</span>
+                        <span className="font-bold flex items-center gap-1">
+                            <Sparkle size={14} className="fill-current" />
+                            {entryFee}
+                        </span>
                     </div>
                     {/* 
                       Optional: Show calculation details
@@ -158,7 +164,10 @@ const CreateRoom = () => {
                     </div>
                     <div className="border-t border-gray-700 my-2 pt-2 flex justify-between items-center">
                         <span className="text-primary font-bold">Winning Prize</span>
-                        <span className="text-primary font-bold text-xl">Rs.{prizePool}</span>
+                        <span className="text-primary font-bold text-xl flex items-center gap-1">
+                            <Sparkle size={20} className="fill-current" />
+                            {prizePool}
+                        </span>
                     </div>
                 </div>
 

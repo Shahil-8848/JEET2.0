@@ -1,4 +1,4 @@
-import { Users, Clock, Trophy } from 'lucide-react';
+import { Users, Clock, Trophy, Sparkle } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 
 const MatchCard = ({ match, onJoin }) => {
@@ -8,8 +8,8 @@ const MatchCard = ({ match, onJoin }) => {
 
     return (
         <div className={`relative overflow-hidden rounded-2xl p-5 border transition-all duration-300 group ${isLive
-                ? 'bg-black/40 border-success/30 hover:border-success/60 shadow-[0_0_15px_rgba(74,222,128,0.05)] hover:shadow-[0_0_20px_rgba(74,222,128,0.2)]'
-                : 'bg-black/40 border-white/5 hover:border-primary/50 shadow-[0_0_15px_rgba(34,211,238,0.05)] hover:shadow-[0_0_20px_rgba(34,211,238,0.2)]'
+            ? 'bg-black/40 border-success/30 hover:border-success/60 shadow-[0_0_15px_rgba(74,222,128,0.05)] hover:shadow-[0_0_20px_rgba(74,222,128,0.2)]'
+            : 'bg-black/40 border-white/5 hover:border-primary/50 shadow-[0_0_15px_rgba(34,211,238,0.05)] hover:shadow-[0_0_20px_rgba(34,211,238,0.2)]'
             } backdrop-blur-md`}>
 
             {/* Background Gradient Blob */}
@@ -32,13 +32,19 @@ const MatchCard = ({ match, onJoin }) => {
                     </div>
                     {!isLive && (
                         <div className="text-right">
-                            <p className="text-primary font-bold text-lg drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">Rs.{match.prize_amount}</p>
+                            <p className="text-primary font-bold text-lg drop-shadow-[0_0_8px_rgba(34,211,238,0.5)] flex items-center gap-1 justify-end">
+                                <Sparkle className="w-4 h-4 fill-current" />
+                                {match.prize_amount}
+                            </p>
                             <p className="text-[10px] text-gray-500 font-medium">{timeAgo}</p>
                         </div>
                     )}
                     {isLive && (
                         <div className="text-right mt-6">
-                            <p className="text-success font-bold text-lg drop-shadow-[0_0_8px_rgba(74,222,128,0.5)]">Rs.{match.prize_amount}</p>
+                            <p className="text-success font-bold text-lg drop-shadow-[0_0_8px_rgba(74,222,128,0.5)] flex items-center gap-1 justify-end">
+                                <Sparkle className="w-4 h-4 fill-current" />
+                                {match.prize_amount}
+                            </p>
                         </div>
                     )}
                 </div>
@@ -50,15 +56,19 @@ const MatchCard = ({ match, onJoin }) => {
                     </div>
                     <div className="flex items-center gap-2 text-xs font-bold text-warning bg-warning/5 px-2.5 py-1 rounded-lg border border-warning/10">
                         <Trophy size={14} />
-                        <span>Entry: Rs.{match.entry_fee}</span>
+                        <span>Entry: </span>
+                        <div className="flex items-center gap-0.5">
+                            <Sparkle className="w-3 h-3 fill-current" />
+                            {match.entry_fee}
+                        </div>
                     </div>
                 </div>
 
                 <button
                     onClick={() => onJoin(match.id)}
                     className={`w-full py-3 rounded-xl font-bold text-sm tracking-wide transition-all active:scale-[0.98] ${isLive
-                            ? 'bg-gradient-to-r from-success to-emerald-500 text-black shadow-[0_0_20px_rgba(74,222,128,0.3)] hover:shadow-[0_0_30px_rgba(74,222,128,0.5)] border border-transparent'
-                            : 'bg-gradient-to-r from-primary to-cyan-600 text-black shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:shadow-[0_0_30px_rgba(34,211,238,0.5)] border border-transparent'
+                        ? 'bg-gradient-to-r from-success to-emerald-500 text-black shadow-[0_0_20px_rgba(74,222,128,0.3)] hover:shadow-[0_0_30px_rgba(74,222,128,0.5)] border border-transparent'
+                        : 'bg-gradient-to-r from-primary to-cyan-600 text-black shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:shadow-[0_0_30px_rgba(34,211,238,0.5)] border border-transparent'
                         }`}
                 >
                     {isLive ? 'Spectate Match' : 'Join Match'}

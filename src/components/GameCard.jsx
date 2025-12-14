@@ -1,4 +1,4 @@
-import { Users, Zap, TrendingUp, Sparkles } from "lucide-react";
+import { Users, Zap, TrendingUp, Sparkle } from "lucide-react";
 import { useState } from "react";
 
 // Enhanced gradient themes with more sophisticated color combinations
@@ -106,10 +106,10 @@ const GameCard = ({ game, onSelect }) => {
           }}
         />
 
-        {/* Floating Sparkles */}
+        {/* Floating Sparkle */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
           {[...Array(6)].map((_, i) => (
-            <Sparkles
+            <Sparkle
               key={i}
               className="absolute animate-float"
               size={8}

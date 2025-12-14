@@ -16,7 +16,7 @@ const Register = () => {
         setLoading(true);
         try {
             await signUp(email, password, fullName);
-            toast.success('Account created! You have received Rs.100 welcome bonus.');
+            toast.success('Account created! You have received ✨ 100 welcome bonus.');
             navigate('/');
         } catch (error) {
             // Error handled in context
