@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
-import { CheckCircle, ExternalLink, Loader2, Trophy, X, Eye, Sparkle } from 'lucide-react';
+import { CheckCircle, ExternalLink, Loader2, Trophy, X, Eye, Sparkles } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const AdminMatches = () => {
@@ -102,7 +102,7 @@ const AdminMatches = () => {
                                 </div>
                                 <div className="text-right">
                                     <p className="text-primary font-bold text-lg flex items-center gap-1 justify-end">
-                                        <Sparkle size={16} className="fill-current" />
+                                        <Sparkles size={16} className="fill-current" />
                                         {match.prize_amount}
                                     </p>
                                     <p className="text-xs text-gray-500">Prize Pool</p>

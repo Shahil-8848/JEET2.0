@@ -1,7 +1,7 @@
 import { Link, useLocation, Outlet } from 'react-router-dom';
-import { Home, PlusCircle, Wallet, ArrowRightLeft, User, LogOut, Sparkle } from 'lucide-react';
+import { Home, PlusCircle, Wallet, ArrowRightLeft, User, LogOut, Sparkles } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-Sparkle
+Sparkles
 
 const Layout = () => {
     const { profile, signOut } = useAuth();
@@ -32,7 +32,7 @@ const Layout = () => {
                         </div>
                         <div>
                             <p className="font-medium text-sm">{profile?.full_name || 'User'}</p>
-                            <p className="text-xs text-primary">  <Sparkle className="w-4 h-4 fill-current" />{profile?.balance || 0}</p>
+                            <p className="text-xs text-primary">  <Sparkles className="w-4 h-4 fill-current" />{profile?.balance || 0}</p>
                         </div>
                     </div>
                     <button

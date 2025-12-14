@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../lib/supabase';
-import { Search, Wallet, Coins, Loader2, ArrowRightLeft, Sparkle } from 'lucide-react';
+import { Search, Wallet, Coins, Loader2, ArrowRightLeft, Sparkles } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 const AdminUsers = () => {
@@ -109,7 +109,7 @@ const AdminUsers = () => {
                                             </div>
                                         </td>
                                         <td className="p-4 font-mono text-primary flex items-center gap-1">
-                                            <Sparkle size={14} className="fill-current" />
+                                            <Sparkles size={14} className="fill-current" />
                                             {user.balance}
                                         </td>
                                         <td className="p-4">{user.total_matches}</td>
@@ -152,7 +152,7 @@ const AdminUsers = () => {
                             <p className="text-lg font-bold text-white">{selectedUser?.full_name}</p>
                             <p className="text-sm text-gray-400 mt-2">Current Balance</p>
                             <p className="text-2xl font-mono text-primary flex items-center gap-1">
-                                <Sparkle size={20} className="fill-current" />
+                                <Sparkles size={20} className="fill-current" />
                                 {selectedUser?.balance}
                             </p>
                         </div>
@@ -177,7 +177,7 @@ const AdminUsers = () => {
 
                             <div>
                                 <label className="block text-sm text-gray-400 mb-1 flex items-center gap-1">
-                                    Amount <Sparkle size={12} className="fill-current" />
+                                    Amount <Sparkles size={12} className="fill-current" />
                                 </label>
                                 <input
                                     type="number"

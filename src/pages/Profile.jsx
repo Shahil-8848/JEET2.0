@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
-import { User, Wallet, Trophy, History, Sparkle } from 'lucide-react';
+import { User, Wallet, Trophy, History, Sparkles } from 'lucide-react';
 import { format } from 'date-fns';
 
 const Profile = () => {
@@ -58,7 +58,7 @@ const Profile = () => {
                     <div>
                         <p className="text-gray-400 text-sm">Balance</p>
                         <p className="font-bold text-lg flex items-center gap-1">
-                            <Sparkle size={16} className="fill-current" />
+                            <Sparkles size={16} className="fill-current" />
                             {profile.balance}
                         </p>
                     </div>
@@ -71,7 +71,7 @@ const Profile = () => {
                     <div>
                         <p className="text-gray-400 text-sm">Total Earnings</p>
                         <p className="font-bold text-lg flex items-center gap-1">
-                            <Sparkle size={16} className="fill-current" />
+                            <Sparkles size={16} className="fill-current" />
                             {profile.total_earnings || 0}
                         </p>
                     </div>
@@ -128,7 +128,7 @@ const Profile = () => {
                                         <td className={`p-4 font-bold ${tx.amount > 0 ? 'text-success' : 'text-error'}`}>
                                             <span className="flex items-center gap-0.5">
                                                 {tx.amount > 0 ? '+' : ''}
-                                                <Sparkle size={12} className="fill-current" />
+                                                <Sparkles size={12} className="fill-current" />
                                                 {Math.abs(tx.amount)}
                                             </span>
                                         </td>

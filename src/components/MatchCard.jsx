@@ -1,4 +1,4 @@
-import { Users, Clock, Trophy, Sparkle } from 'lucide-react';
+import { Users, Clock, Trophy, Sparkles } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 
 const MatchCard = ({ match, onJoin }) => {
@@ -33,7 +33,7 @@ const MatchCard = ({ match, onJoin }) => {
                     {!isLive && (
                         <div className="text-right">
                             <p className="text-primary font-bold text-lg drop-shadow-[0_0_8px_rgba(34,211,238,0.5)] flex items-center gap-1 justify-end">
-                                <Sparkle className="w-4 h-4 fill-current" />
+                                <Sparkles className="w-4 h-4 fill-current" />
                                 {match.prize_amount}
                             </p>
                             <p className="text-[10px] text-gray-500 font-medium">{timeAgo}</p>
@@ -42,7 +42,7 @@ const MatchCard = ({ match, onJoin }) => {
                     {isLive && (
                         <div className="text-right mt-6">
                             <p className="text-success font-bold text-lg drop-shadow-[0_0_8px_rgba(74,222,128,0.5)] flex items-center gap-1 justify-end">
-                                <Sparkle className="w-4 h-4 fill-current" />
+                                <Sparkles className="w-4 h-4 fill-current" />
                                 {match.prize_amount}
                             </p>
                         </div>
@@ -58,7 +58,7 @@ const MatchCard = ({ match, onJoin }) => {
                         <Trophy size={14} />
                         <span>Entry: </span>
                         <div className="flex items-center gap-0.5">
-                            <Sparkle className="w-3 h-3 fill-current" />
+                            <Sparkles className="w-3 h-3 fill-current" />
                             {match.entry_fee}
                         </div>
                     </div>

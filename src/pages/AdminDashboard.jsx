@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import toast from 'react-hot-toast';
-import { CheckCircle, XCircle, Loader2, Sparkle } from 'lucide-react';
+import { CheckCircle, XCircle, Loader2, Sparkles } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -93,7 +93,7 @@ const AdminDashboard = () => {
                                         <td className="p-4">{match.host?.full_name}</td>
                                         <td className="p-4">{match.opponent?.full_name || 'N/A'}</td>
                                         <td className="p-4 text-primary font-bold flex items-center gap-1">
-                                            <Sparkle size={14} className="fill-current" />
+                                            <Sparkles size={14} className="fill-current" />
                                             {match.prize_amount}
                                         </td>
                                         <td className="p-4">
